@@ -4,7 +4,7 @@ const express = require('express')
 connecttomongo()
 
 const app = express()
-const port = 5000
+const port = 1000
 app.use(express.json())
 app.get('/', (req, res) => {
     res.send('Hello World! ')
