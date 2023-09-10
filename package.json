@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "both": "concurrently \"npm run dev\" \"nodemon backend/index.js\""
   },
   "devDependencies": {
     "@types/node": "20.5.9",
