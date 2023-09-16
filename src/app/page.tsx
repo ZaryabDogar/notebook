@@ -1,9 +1,15 @@
 import React from 'react'
-
+import Navbar from './components/Navbar'
+// import Home from './Home/page'
+import Router from 'next/router'
 export default function page() {
   return (
     <div >
-      <h1 className='text-6xl'>NoteBook On The Cloud</h1>
+      {/* <Navbar/> */}
+      {/* <Home/> */}
+
+      
+
       </div>
   )
 }
