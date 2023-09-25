@@ -74,7 +74,7 @@ router.put('/updatenote/:id', fetchuser, async (req, res) => {
 //Route 5 delete an exsisting notes using delete://  /api/notes/deletenote   .login required
 
 router.delete('/deletenote/:id', fetchuser, async (req, res) => {
-    // const { title, description, tag } = req.body;
+    const { title, description, tag } = req.body;
     try {
 
 
@@ -88,7 +88,7 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
         let note = await Notes.findById(req.params.id);
         // allow deletion if only user owns it
         if (!note) { return res.status(404).send("Not Found") }
-        if (note.user.toString() !== req.user._id) { return res.status(401).send("Not Allowed") }
+        if (note.user.toString() !== req.user._id) { return res.status(401).send({'message':"Not Allowed"}) }
         note = await Notes.findByIdAndDelete(req.params.id, { $set: newNote }, { new: true })
         res.json({success:"note has been deleted",note:note})
 

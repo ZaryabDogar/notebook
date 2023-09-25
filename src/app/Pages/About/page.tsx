@@ -1,8 +1,13 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
+import { useContext } from 'react'
 
 function page() {
+
   return (
-    <div>this is about page</div>
+  <> 
+    <div className='text-7xl'>this is about </div>
+  </>
   )
 }
 
