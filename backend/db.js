@@ -1,16 +1,24 @@
-const mongoose = require('mongoose')
-const mongouri = 'mongodb://localhost:27017/notebook'
-// const mongouri = 'mongodb+srv://zaryabdogar23:dogar1234@cluster0.wzthjpm.mongodb.net/?retryWrites=true&w=majority'
 
+const dotenv = require('dotenv');
+dotenv.config(); 
 
-const connecttomongo = async () => {
-    await mongoose.connect(mongouri)
-
-    console.log('connected to mongo successfully')
-
-
-}
+const mongouri = process.env.MONGO_URI;
 
 
 
-module.exports = connecttomongo;
+const mongoose = require('mongoose');
+
+const connectToMongo = async () => {
+  try {
+    await mongoose.connect(mongouri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log('Connected to MongoDB successfully');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
+};
+
+module.exports = connectToMongo;
