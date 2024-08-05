@@ -14,7 +14,7 @@ export default function Navbar() {
 	
 
 
-    
+		const [authCheck, setAuthCheck] = useState(false); 
 	let arr = [true, false, false, false, false, false];
 	const [style, setStyle] = useState(arr);
 	const [dropDown, setDropDown] = useState(true);
@@ -41,11 +41,15 @@ export default function Navbar() {
           }
         router.refresh()
 	};
-	let authcheck=localStorage.getItem('auth')
-    if(authcheck){
-        document.title=`${name}--NoteBook` 
-    }
-
+	useEffect(() => {
+        if (typeof window !== "undefined") {
+            let authcheck = localStorage.getItem('auth');
+            setAuthCheck(!!authcheck);
+            if (authcheck) {
+                document.title = `${name}--NoteBook`;
+            }
+        }
+    }, [name]);
 	return (
 		<div className="2xl:container 2xl:mx-auto border-b-2 border-gray-400 ">
 			<div className="bg-black rounded shadow-lg py-5 px-7 sticky">
@@ -109,7 +113,7 @@ export default function Navbar() {
 						</Link> */}
 					</ul>
 					<div className=" flex space-x-9 justify-center items-center lg:pl-16 pl-6">
-                    {!localStorage.getItem("auth") ? (
+                    {!authCheck ? (
   // If the user is not authenticated, show Login and Signup links
   <div className="relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 flex space-x-2  ">
     <Link href="/Pages/Signin">
