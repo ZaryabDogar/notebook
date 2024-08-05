@@ -161,7 +161,7 @@ export default function Notes(props) {
 						<h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">
 							{notess.title}
 						</h4>
-						<p className="text-gray-800 dark:text-gray-100 text-sm mb-3">
+						<p className="text-gray-800 dark:text-gray-100 text-sm mb-3 ">
 							{notess.description}
 						</p>
 						<span className="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-1 rounded dark:bg-indigo-900 dark:text-white ">

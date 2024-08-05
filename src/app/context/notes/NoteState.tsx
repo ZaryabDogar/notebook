@@ -3,27 +3,32 @@ import React, { useState } from 'react';
 import noteContext from './noteContext';
 
 const NoteState = (props) => {
-	const host = 'http://localhost:500';
+	const host = 'https://note-be-two.vercel.app';
 	const s1 = [];
 	const [notes, setnotes] = useState(s1);
 	const [user, setuser] = useState([])
 	//get all notes
-	const getnotes = async() => {
-    // Api calls
-    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+	const getnotes = async () => {
+		try {
+		  const response = await fetch(`${host}/api/notes/fetchallnotes`, {
 			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json',
-				'auth-token':
-					localStorage.getItem('auth'),
+			  'Content-Type': 'application/json',
+			  'auth-token': localStorage.getItem('auth'),
 			},
-
-		});
-		const json = await response.json();
-    
-    setnotes(json)
-
-	};
+		  });
+	  
+		  if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		  }
+	  
+		  const json = await response.json();
+		  setnotes(json);
+		} catch (error) {
+		  console.error('Error fetching notes:', error);
+		}
+	  };
+	  
 
 	//add note
 	const addnote = async(title, description, tag) => {

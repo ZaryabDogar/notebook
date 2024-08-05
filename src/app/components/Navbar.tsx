@@ -95,7 +95,7 @@ export default function Navbar() {
 								Notes
 							</li>
 						</Link>
-						<Link href="/Pages/About">
+						{/* <Link href="/Pages/About">
 							<li
 								onClick={() => selected(2)}
 								className={`${
@@ -106,7 +106,7 @@ export default function Navbar() {
 							>
 								About
 							</li>
-						</Link>
+						</Link> */}
 					</ul>
 					<div className=" flex space-x-9 justify-center items-center lg:pl-16 pl-6">
                     {!localStorage.getItem("auth") ? (
@@ -137,10 +137,10 @@ export default function Navbar() {
 					</div>
 				</nav>
 				{/* for smaller devcies */}
-				<div className="block md:hidden w-full mt-5 relative z-20">
+				<div className="block md:hidden w-full mt-5 relative z-50">
 					<div
 						onClick={() => setDropDown(!dropDown)}
-						className="cursor-pointer px-4 py-3 text-white bg-indigo-600 rounded flex justify-between items-center w-full"
+						className="cursor-pointer px-4 py-3 text-white bg-indigo-600 rounded flex justify-between items-center w-full "
 					>
 						<div className="flex space-x-2">
 							<span
@@ -178,12 +178,12 @@ export default function Navbar() {
 							/>
 						</svg>
 					</div>
-					<div className=" relative z-20">
+					<div className=" relative z-40">
 						<ul
 							id="list"
 							className={`${
 								dropDown ? 'hidden' : 'block'
-							} font-normal text-base leading-4 absolute top-2  w-full rounded shadow-md `}
+							} font-normal text-base leading-4 absolute top-[-8px]  w-full rounded shadow-md `}
 						>
 							<Link href="/">
 								<li
@@ -201,14 +201,14 @@ export default function Navbar() {
 									Notes
 								</li>
 							</Link>
-							<Link href="/Pages/About">
+							{/* <Link href="/Pages/About">
 								<li
 									onClick={() => setSelectedText('About')}
 									className="px-4 py-3 text-white rounded-sm bg-black border border-gray-50 focus:outline-none focus:bg-gray-100 hover:bg-indigo-600 duration-100 cursor-pointer text-xs leading-3 font-normal"
 								>
 									About
 								</li>
-							</Link>
+							</Link> */}
 						
 						</ul>
 					</div>
