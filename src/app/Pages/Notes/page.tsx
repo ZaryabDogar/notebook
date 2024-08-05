@@ -9,7 +9,7 @@ import Alert from '@/app/components/Alert';
 
 
 
-export default function Page(props: any) {
+export default function Page(props) {
 	const context = useContext(noteContext); 
 	const { notes ,getnotes,editnote,getuser} = context;
 	const router=useRouter()
