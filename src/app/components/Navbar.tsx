@@ -7,8 +7,12 @@ import noteContext from '../context/notes/noteContext';
 
 export default function Navbar() {
     const context = useContext(noteContext); 
+	let check=false;
     const { notes ,user} = context;
-    let name=user.name
+
+		let name=user.name
+	
+
 
     
 	let arr = [true, false, false, false, false, false];
@@ -37,7 +41,8 @@ export default function Navbar() {
           }
         router.refresh()
 	};
-    if(localStorage.getItem('auth')){
+	let authcheck=localStorage.getItem('auth')
+    if(authcheck){
         document.title=`${name}--NoteBook` 
     }
 
@@ -121,7 +126,7 @@ export default function Navbar() {
 <div className='flex items-center space-x-4'>
   <h1 className='cursor-pointer  hover:text-indigo-700 ' onClick={handellogout}>Logout</h1>
   <div className="relative">
-  <h1 className='text-indigo-500  cursor-pointer'>{user.name} </h1>
+  <h1 className='text-indigo-500  cursor-pointer'>{check?`not avaiable`:user.name} </h1>
   <div className="animate-ping w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto duration-200" />
     <div className="w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto shadow-lg" />
   </div>
