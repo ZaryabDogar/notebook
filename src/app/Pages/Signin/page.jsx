@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Alert from "@/app/components/Alert";
+import Alert from "./app/components/Alert";
 
 
 function Signin() {
