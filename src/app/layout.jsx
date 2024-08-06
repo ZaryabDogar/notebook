@@ -1,33 +1,24 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import Navbar from './components/Navbar'
-import NoteState from './context/notes/NoteState'
-import { Inter } from 'next/font/google'
+import './globals.css';
+import Navbar from './components/Navbar';
+import NoteState from './context/notes/NoteState';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'NoteBook',
-  description: 'your notrbook on the cloud to keep notes or other information to save',
-}
+  description: 'Your notebook on the cloud to keep notes or other information to save',
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-       <NoteState>
-      <body className={inter.className}>
-     
-      <Navbar/>
-        {children}
-       
+      <NoteState>
+        <body className={inter.className}>
+          <Navbar />
+          {children}
         </body>
-       
- </NoteState>
-        
+      </NoteState>
     </html>
-  )
+  );
 }

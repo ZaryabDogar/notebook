@@ -5,7 +5,7 @@ import Alert from './app/components/Alert';
 import Notes from './app/components/Note';
 import noteContext from './app/context/notes/noteContext';
 
-export default function Page(props: any) {
+export default function Page(props) {
 	const context = useContext(noteContext);
 
 	if (!context) {
