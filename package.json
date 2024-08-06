@@ -10,15 +10,11 @@
     "both": "concurrently \"npm run dev\" \"nodemon backend/index.js\""
   },
   "devDependencies": {
-    "@types/jquery": "^3.5.19",
-    "@types/node": "20.5.9",
-    "@types/react": "18.2.21",
     "autoprefixer": "^10.4.15",
     "globals": "^15.9.0",
     "next": "^13.4.19",
     "postcss": "^8.4.29",
-    "tailwindcss": "^3.3.3",
-    "typescript": "5.2.2"
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",

@@ -7,17 +7,15 @@ import noteContext from '../context/notes/noteContext';
 
 export default function Navbar() {
     const context = useContext(noteContext); 
-	let check=false;
     const { notes ,user} = context;
-if (user!==null){
-	let name=user.name
-	document.title=name+"--Notes"
-}
-else{
-	let name="***"
-}
-		
-	
+	const [name1, setname1] = useState('')
+	useEffect(() => {
+		if (user !== null) {
+		  const name = user.name;
+		  document.title = `${name} -- Notes`;
+		  setname1(name);
+		}
+	  }, [user]); 
 
 
 		const [authCheck, setAuthCheck] = useState(false); 
@@ -51,11 +49,8 @@ else{
         if (typeof window !== "undefined") {
             let authcheck = localStorage.getItem('auth');
             setAuthCheck(!!authcheck);
-            if (authcheck) {
-                document.title = `${name}--NoteBook`;
-            }
         }
-    }, [name]);
+    }, []);
 	return (
 		<div className="2xl:container 2xl:mx-auto border-b-2 border-gray-400 ">
 			<div className="bg-black rounded shadow-lg py-5 px-7 sticky">
@@ -136,7 +131,7 @@ else{
 <div className='flex items-center space-x-4'>
   <h1 className='cursor-pointer  hover:text-indigo-700 ' onClick={handellogout}>Logout</h1>
   <div className="relative">
-  <h1 className='text-indigo-500  cursor-pointer'>{check?`not avaiable`:user.name} </h1>
+  <h1 className='text-indigo-500  cursor-pointer'>{name1} </h1>
   <div className="animate-ping w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto duration-200" />
     <div className="w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto shadow-lg" />
   </div>
