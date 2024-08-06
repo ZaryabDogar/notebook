@@ -13,12 +13,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <NoteState>
-        <body className={inter.className}>
-          <Navbar />
-          {children}
-        </body>
-      </NoteState>
-    </html>
+    <head>
+      {/* Link to the favicon */}
+      <link rel="icon" href="/favicon.ico" />
+    </head>
+    <NoteState>
+      <body className={inter.className}>
+        <Navbar />
+        {children}
+      </body>
+    </NoteState>
+  </html>
   );
 }
