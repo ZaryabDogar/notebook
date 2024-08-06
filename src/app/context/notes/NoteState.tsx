@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import noteContext from './noteContext';
 
-const NoteState = (props) => {
+const NoteState = (props:any) => {
     const host = 'https://note-be-two.vercel.app';
     const [notes, setNotes] = useState([{}]);
     const [user, setUser] = useState([{}]);
