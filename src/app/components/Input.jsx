@@ -1,6 +1,6 @@
 'use client';
 import React, { useContext, useEffect, useState } from 'react';
-import noteContext from './app/context/notes/noteContext';
+import noteContext from '../context/notes/noteContext';
 
 export default function Input(props) {
 	const context = useContext(noteContext);

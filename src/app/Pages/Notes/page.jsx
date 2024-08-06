@@ -1,9 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
-import Alert from './app/components/Alert';
-import Notes from './app/components/Note';
-import noteContext from './app/context/notes/noteContext';
+import Alert from '../../components/Alert';
+import Notes from '../../components/Note';
+import noteContext from '../../context/notes/noteContext';
 
 export default function Page(props) {
 	const context = useContext(noteContext);
