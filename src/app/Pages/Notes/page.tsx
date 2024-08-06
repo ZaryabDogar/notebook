@@ -9,7 +9,7 @@ import Alert from '@/app/components/Alert';
 
 
 
-export default function Page(props) {
+export default function Page(props:any) {
 	const context = useContext(noteContext); 
 	
     if (!context) {
