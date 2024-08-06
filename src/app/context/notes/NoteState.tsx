@@ -1,11 +1,11 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+"use client"
+import React, { useState, useCallback } from 'react';
 import noteContext from './noteContext';
 
 const NoteState = (props) => {
     const host = 'https://note-be-two.vercel.app';
-    const [notes, setnotes] = useState([]);
-    const [user, setuser] = useState([]);
+    const [notes, setNotes] = useState([]);
+    const [user, setUser] = useState([]);
 
     const getAuthToken = () => {
         if (typeof window !== 'undefined') {
@@ -14,7 +14,7 @@ const NoteState = (props) => {
         return null;
     };
 
-    const getnotes = async () => {
+    const getnotes = useCallback(async () => {
         try {
             const response = await fetch(`${host}/api/notes/fetchallnotes`, {
                 method: 'GET',
@@ -29,74 +29,92 @@ const NoteState = (props) => {
             }
 
             const json = await response.json();
-            setnotes(json);
+            setNotes(json);
         } catch (error) {
             console.error('Error fetching notes:', error);
         }
-    };
+    }, []); // Empty array ensures this function is stable
 
-    const addnote = async (title, description, tag) => {
-        const response = await fetch(`${host}/api/notes/addnote`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': getAuthToken(),
-            },
-            body: JSON.stringify({ title, description, tag }),
-        });
-        const json = await response.json();
-        setnotes(notes.concat(json));
-    };
-
-    const editnote = async (id, title, description, tag) => {
-        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': getAuthToken(),
-            },
-            body: JSON.stringify({ title, description, tag }),
-        });
-
-        let newnotes = JSON.parse(JSON.stringify(notes));
-        for (let index = 0; index < newnotes.length; index++) {
-            const element = newnotes[index];
-            if (element._id === id) {
-                newnotes[index].title = title;
-                newnotes[index].description = description;
-                newnotes[index].tag = tag;
-                break;
-            }
+    const addnote = useCallback(async (title, description, tag) => {
+        try {
+            const response = await fetch(`${host}/api/notes/addnote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': getAuthToken(),
+                },
+                body: JSON.stringify({ title, description, tag }),
+            });
+            const json = await response.json();
+            setNotes(notes.concat(json));
+        } catch (error) {
+            console.error('Error adding note:', error);
         }
-        setnotes(newnotes);
-    };
+    }, [notes]);
 
-    const deletenote = async (id) => {
-        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': getAuthToken(),
-            },
-        });
-        const json = await response.json();
-        const newnotes = notes.filter((note) => {
-            return note._id !== id;
-        });
-        setnotes(newnotes);
-    };
+    const editnote = useCallback(async (id, title, description, tag) => {
+        try {
+            const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': getAuthToken(),
+                },
+                body: JSON.stringify({ title, description, tag }),
+            });
 
-    const getuser = async (authtoken) => {
-        const response = await fetch(`${host}/api/auth/getuser`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': authtoken,
-            },
-        });
-        const json = await response.json();
-        setuser(json.user);
-    };
+            let newNotes = [...notes];
+            const index = newNotes.findIndex(note => note._id === id);
+            if (index !== -1) {
+                newNotes[index] = { ...newNotes[index], title, description, tag };
+                setNotes(newNotes);
+            }
+        } catch (error) {
+            console.error('Error editing note:', error);
+        }
+    }, [notes]);
+
+    const deletenote = useCallback(async (id) => {
+        try {
+            const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': getAuthToken(),
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            setNotes(notes.filter(note => note._id !== id));
+        } catch (error) {
+            console.error('Error deleting note:', error);
+        }
+    }, [notes]);
+
+    const getuser = useCallback(async (authtoken) => {
+        console.log(authtoken)
+        try {
+            const response = await fetch(`${host}/api/auth/getuser`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': authtoken,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const json = await response.json();
+            setUser(json.user);
+        } catch (error) {
+            console.error('Error fetching user:', error);
+        }
+    }, []);
 
     return (
         <noteContext.Provider value={{ notes, deletenote, editnote, addnote, getnotes, getuser, user }}>

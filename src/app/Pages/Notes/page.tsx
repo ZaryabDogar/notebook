@@ -17,16 +17,27 @@ export default function Page(props:any) {
     }
 	const { notes ,getnotes,editnote,getuser} = context;
 	const router=useRouter()
-
+	console.log('Context values:', { notes, getnotes, getuser });
 	useEffect(() => {
-		if(localStorage.getItem('auth')){
-			router.refresh()
-			getnotes()
-			getuser(localStorage.getItem('auth'))
-		}else{
-			router.push("/Pages/Signin")
+		const auth = localStorage.getItem('auth');
+		if (auth) {
+		  console.log('Refreshing and fetching notes/user');
+		  router.refresh();
+		  if (typeof getnotes === 'function') {
+			getnotes();
+		  } else {
+			console.error('getnotes is not a function or undefined');
+		  }
+		  if (typeof getuser === 'function') {
+			getuser(auth);
+		  } else {
+			console.error('getuser is not a function or undefined');
+		  }
+		} else {
+		  router.push('/Pages/Signin');
 		}
-	}, [])
+	  }, [getnotes, getuser, router]);
+	
 	const [alert, setalert] = useState({msg:"",type:"",set:"hidden"})
 	const showalert=(message,type,set)=>{
 	  setalert({msg:message,type:type,set:set})
