@@ -18,15 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    
+       <NoteState>
       <body className={inter.className}>
-        <NoteState>
+     
       <Navbar/>
         {children}
-        </NoteState>
+       
         </body>
        
-
+ </NoteState>
         
     </html>
   )
