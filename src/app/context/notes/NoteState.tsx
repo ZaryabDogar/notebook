@@ -4,8 +4,8 @@ import noteContext from './noteContext';
 
 const NoteState = (props) => {
     const host = 'https://note-be-two.vercel.app';
-    const [notes, setNotes] = useState([]);
-    const [user, setUser] = useState([]);
+    const [notes, setNotes] = useState([{}]);
+    const [user, setUser] = useState([{}]);
 
     const getAuthToken = () => {
         if (typeof window !== 'undefined') {

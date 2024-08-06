@@ -9,8 +9,14 @@ export default function Navbar() {
     const context = useContext(noteContext); 
 	let check=false;
     const { notes ,user} = context;
-
-		let name=user.name
+if (user!==null){
+	let name=user.name
+	document.title=name+"--Notes"
+}
+else{
+	let name="***"
+}
+		
 	
 
 

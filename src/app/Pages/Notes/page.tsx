@@ -24,7 +24,7 @@ export default function Page(props:any) {
 		  console.log('Refreshing and fetching notes/user');
 		  router.refresh();
 		  if (typeof getnotes === 'function') {
-			getnotes();
+			context.getnotes();
 		  } else {
 			console.error('getnotes is not a function or undefined');
 		  }
