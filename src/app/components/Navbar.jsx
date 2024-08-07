@@ -7,23 +7,26 @@ import noteContext from '../context/notes/noteContext';
 
 export default function Navbar() {
     const context = useContext(noteContext); 
-    const { notes ,user} = context;
-	const [name1, setname1] = useState('')
+    	const { notes ,user} = context;
+		const [name1, setname1] = useState('')
+ 		const [authCheck, setAuthCheck] = useState(true); 
+		let arr = [true, false, false, false, false, false];
+		const [style, setStyle] = useState(arr);
+		const [dropDown, setDropDown] = useState(true);
+		const [text, setText] = useState('');
+		const router = useRouter();
 	useEffect(() => {
-		if (user !== null) {
+		if (user !== null) {					
 		  const name = user.name;
 		  document.title = `${name} -- Notes`;
 		  setname1(name);
 		}
+		if (typeof window !== "undefined") {
+            const authcheck = localStorage.getItem('auth');
+            setAuthCheck(authcheck);
+        }
 	  }, [user]); 
 
-
-		const [authCheck, setAuthCheck] = useState(false); 
-	let arr = [true, false, false, false, false, false];
-	const [style, setStyle] = useState(arr);
-	const [dropDown, setDropDown] = useState(true);
-	const [text, setText] = useState('');
-	const router = useRouter();
 	const selected = (props) => {
 		let newArr = [...arr];
 		for (let i = 0; i < newArr.length; i++) {
@@ -41,16 +44,12 @@ export default function Navbar() {
             document.title=`NoteBook` 
 
             localStorage.removeItem('auth');
+			setAuthCheck(false)
             router.push("/Pages/Signin");
           }
         router.refresh()
 	};
-	useEffect(() => {
-        if (typeof window !== "undefined") {
-            let authcheck = localStorage.getItem('auth');
-            setAuthCheck(!!authcheck);
-        }
-    }, []);
+	
 	return (
 		<div className="2xl:container 2xl:mx-auto border-b-2 border-gray-400 ">
 			<div className="bg-black rounded shadow-lg py-5 px-7 sticky">
@@ -100,18 +99,7 @@ export default function Navbar() {
 								Notes
 							</li>
 						</Link>
-						{/* <Link href="/Pages/About">
-							<li
-								onClick={() => selected(2)}
-								className={`${
-									style[2]
-										? 'text-white bg-indigo-600'
-										: 'text-gray-600 border border-white bg-gray-50'
-								} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded`}
-							>
-								About
-							</li>
-						</Link> */}
+					
 					</ul>
 					<div className=" flex space-x-9 justify-center items-center lg:pl-16 pl-6">
                     {!authCheck ? (
@@ -206,14 +194,7 @@ export default function Navbar() {
 									Notes
 								</li>
 							</Link>
-							{/* <Link href="/Pages/About">
-								<li
-									onClick={() => setSelectedText('About')}
-									className="px-4 py-3 text-white rounded-sm bg-black border border-gray-50 focus:outline-none focus:bg-gray-100 hover:bg-indigo-600 duration-100 cursor-pointer text-xs leading-3 font-normal"
-								>
-									About
-								</li>
-							</Link> */}
+							
 						
 						</ul>
 					</div>

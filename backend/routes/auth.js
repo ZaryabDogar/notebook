@@ -19,8 +19,9 @@ router.post('/createuser', [
     // if there are errors return bad request and errors
     success=false
     if (!errors.isEmpty()) {
-        res.status(400).json({success, errors: errors.array() });
+       return res.status(400).json({success, error: errors.array() });
     }
+    console.log(req.body.email )
     try {
 
         //create user and adding validations or check weather the user exist or not with this email
@@ -50,7 +51,7 @@ router.post('/createuser', [
         const token = jwt.sign(data, JWT_SECRET);
         success=true
 
-        res.json({success,Auth_token:token})
+        return res.json({success,Auth_token:token})
         // res.json(user)
     } catch (error) {
         success=false
@@ -69,7 +70,7 @@ router.post('/login', [
     const errors = validationResult(req);
     // if there are errors return bad request and errors
     if (!errors.isEmpty()) {
-        res.status(400).json({ errors: errors.array() });
+        res.status(400).json({ error: errors.array() });
     }
 
     const { email, password } = req.body;

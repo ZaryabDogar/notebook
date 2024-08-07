@@ -1,22 +1,39 @@
 const connecttomongo = require('./db')
 const express = require('express')
-var cors = require('cors')
+const cors = require("cors");
+const app = express()
+app.use(cors());
 
 connecttomongo()
 
-const app = express()
+
 const port = 500
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://notebook-tan-three.vercel.app'); // Replace with your frontend URL
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    next();
-  });
-app.use(express.json())
+
+
+// const allowedOrigins = [
+//     'http://localhost:3000',  // Your local development server
+//     'https://notebook-tan-three.vercel.app',  // Your deployed frontend server
+//     'https://your-deployed-frontend.vercel.app'  // Add other front-end domains as needed
+//   ];
+  
+//   const corsOptions = {
+//     origin: (origin, callback) => {
+//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     methods: 'GET,POST,PUT,DELETE,OPTIONS',
+//     allowedHeaders: 'Content-Type,Authorization',
+//   };
+  
+//   app.use(cors(corsOptions));
+
 app.get('/', (req, res) => {
     res.send('Hello World! ')
 })
-
+app.use(express.json())
 // available routes
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))

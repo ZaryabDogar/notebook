@@ -18,7 +18,7 @@ const [credentials, setcredentials] = useState({email:"",password:""})
 const router =useRouter()
 	const handelsubmit=async(e)=>{
 		e.preventDefault();
-		const response = await fetch(`https://note-be-two.vercel.app/api/auth/login`, {
+		const response = await fetch(`http://localhost:500/api/auth/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -35,13 +35,22 @@ const router =useRouter()
 			//save the auth token redirect
 			localStorage.setItem('auth',json.Auth_token)
 			router.push("/")
-		}else
-		{
-			showalert(json.error,'red','flex')
-
-		
-
-		}
+		}else {
+            if (Array.isArray(json.error)) {
+              // If errors is an array, map over it and display each error message
+              const errorMsg = json.error.map(err => `${err.path}: ${err.msg}`).join('\n');
+              showalert(`Error(s):\n${errorMsg}`, 'red', 'flex');
+              console.log('Errors:', json.error);
+            } else if (typeof json.error === 'object') {
+              // If error is an object, display its properties (for debugging)
+              console.error('Unexpected error format:', json.error);
+              showalert(`Unexpected error occurred: ${JSON.stringify(json.error)}`, 'red', 'flex');
+            } else {
+              // If error is neither an array nor an object
+              console.error('Unknown error type:', json.error);
+              showalert(json.error, 'red', 'flex');
+            }
+        }
 	}
 	const onchange=(e)=>{
 		setcredentials({...credentials,[e.target.name]:e.target.value})
@@ -133,7 +142,7 @@ const router =useRouter()
 						<button
 							role="button"
 							aria-label="create my account"
-							className={`${credentials.password.length<5||credentials.email.length<5 ?'focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 text-sm font-semibold leading-none text-gray-400 focus:outline-none bg-indigo-400 border rounded hover:bg-indigo-500 py-4 w-full':'focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full'}`} 
+							className={`${credentials.password.length<6||credentials.email.length<5 ?'focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 text-sm font-semibold leading-none text-gray-400 focus:outline-none bg-indigo-400 border rounded hover:bg-indigo-500 py-4 w-full':'focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full'}`} 
 						>
 							Login to my account
 						</button>
