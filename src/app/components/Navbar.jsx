@@ -68,7 +68,7 @@ export default function Navbar() {
 								fill="#FFFFFF"
 							/>
 						</svg>
-						<h2 className="font-normal text-2xl leading-6 text-white">
+						<h2 className="font-normal sm:text-2xl text-lg leading-6 text-white">
 							Your Notes
 						</h2>
 					</div>
