@@ -13,7 +13,7 @@ const port = 500
 const allowedOrigins = [
     'http://localhost:3000',  // Your local development server
     'https://notebook-tan-three.vercel.app',  // Your deployed frontend server
-    'https://main--notesi.netlify.app'  // Add other front-end domains as needed
+    'https://notesi.netlify.app' // Add other front-end domains as needed
   ];
   
   const corsOptions = {

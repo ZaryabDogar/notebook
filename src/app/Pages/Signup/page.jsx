@@ -51,7 +51,7 @@ function Signup() {
             } else {
               // If error is neither an array nor an object
               console.error('Unknown error type:', json.error);
-              showalert('Unknown error occurred', 'red', 'flex');
+              showalert(json.error, 'red', 'flex');
             }
         }
 	}
