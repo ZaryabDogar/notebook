@@ -16,7 +16,6 @@ const NoteState = (props) => {
     const getnotes = useCallback(async () => {
         try {
             const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-                mode: 'no-cors',
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +34,6 @@ const NoteState = (props) => {
     const addnote = useCallback(async (title, description, tag) => {
         try {
             const response = await fetch(`${host}/api/notes/addnote`, {
-                mode: 'no-cors',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,9 +49,7 @@ const NoteState = (props) => {
     }, [notes]);
     const editnote = useCallback(async (id, title, description, tag) => {
         try {
-
             const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-                mode: 'no-cors',
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -74,9 +70,7 @@ const NoteState = (props) => {
     const deletenote = useCallback(async (id) => {
         try {
             const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
-                mode: 'no-cors',
                 method: 'DELETE',
-
                 headers: {
                     'Content-Type': 'application/json',
                     'auth-token': getAuthToken(),
@@ -91,7 +85,6 @@ const NoteState = (props) => {
         }
     }, [notes]);
     const getuser = useCallback(async (authtoken) => {
-        mode: 'no-cors',
         console.log(authtoken)
         try {
             const response = await fetch(`${host}/api/auth/getuser`, {

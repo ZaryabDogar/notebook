@@ -8,15 +8,18 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'NoteBook',
   description: 'Your notebook on the cloud to keep notes or other information to save',
+  icons:{
+    icon:["/favicon.ico?v=4"],
+   apple:['/apple-touch-icon.png?v=4'],
+   shortcut:['/apple-touch-icon.png']
+
+  }
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <head>
-      {/* Link to the favicon */}
-      <link rel="icon" href="/favicon.ico" />
-    </head>
+ 
     <NoteState>
       <body className={inter.className}>
         <Navbar />

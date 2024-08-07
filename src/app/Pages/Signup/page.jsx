@@ -22,7 +22,7 @@ function Signup() {
 
 	const handelsubmit=async(e)=>{
 		e.preventDefault();
-		const response = await fetch(`http://localhost:500/api/auth/createuser`, {
+		const response = await fetch(`https://note-be-two.vercel.app/api/auth/createuser`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
