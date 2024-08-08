@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'DOGAR DI YARI TE SHEER DI SWARI';
-
+// "proxy": "https://note-be-two.vercel.app"
 const fetchuser = (req, res, next) => {
     // Get the user from jwt token
     const token = req.header('auth-token');
