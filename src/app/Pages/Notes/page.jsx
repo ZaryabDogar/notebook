@@ -52,7 +52,7 @@ export default function Page(props) {
 					: '--Your Saved Notes Are Given Below--'}
 			</h1>
 
-			<div className="mx-auto container py-2  overflow-hidden">
+			<div className="mx-auto container py-2  overflow-hidden sm:p-5 p-2">
 				<div className="grid sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 					{notes.map((note) => {
 						return <Notes notess={note} key={note._id} showalert={showalert} />;
