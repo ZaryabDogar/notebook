@@ -79,7 +79,7 @@ function Signin() {
 							Login to your account
 						</p>{' '}
 						<br />
-						<p className="text-sm mt-4 font-medium leading-none text-gray-500">
+						<p className="text-sm mt-1 font-medium leading-none text-gray-500">
 							placeholder: <br />
 							Email:check@email.com <br /> password :123456
 						</p>
